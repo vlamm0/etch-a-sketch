@@ -30,7 +30,6 @@ const container = document.querySelector(".container")
 container.style.display = "flex"
 container.style.flexDirection = "column"
 container.style.border = "2px solid black"
-container.style.justifyContent = "flex-end" 
 container.style.height = "960px"
 body.style.margin = "0px"
 
