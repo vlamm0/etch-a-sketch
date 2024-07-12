@@ -1,40 +1,49 @@
+// creates grid, automatically set to 16x16 but can be modified by passing a number for numberxnumber grid
+function getGrid(dim = 16) {
+    // create rows
+    for (let i = 0; i <dim; i++) {
+        const row = document.createElement("div")
+        row.style.display = "flex"
+        row.style.flex = "auto"
+        
+        // create squares for each row (effectively making columns)
+        for (let j = 0; j < dim; j++) {
+            const square = document.createElement("div")
+            square.style.width = "50px"
+            square.style.flex = "auto"
+            // event for drawing
+            square.addEventListener("mouseover", () => {
+                square.style.backgroundColor = "black"
+            })
+
+            row.appendChild(square)
+            }
+        container.appendChild(row)
+    }
+
+}
+// Main code
 const body = document.querySelector("body")
-// const input = document.createElement("input")
-// input.setAttribute("type", "number")
+const btn = document.createElement("button")
+btn.textContent = "Change Dimensions"
 const container = document.querySelector(".container")
 container.style.display = "flex"
 container.style.flexDirection = "column"
 container.style.border = "2px solid black"
+container.style.justifyContent = "flex-end" 
+container.style.height = "960px"
 body.style.margin = "0px"
 
-//container.style.gap = "5px"
+//change dimensions
+btn.addEventListener("click", () => {
+    let dimensions = prompt("Enter dimensions, for 16 rows and columns type '16'");
+    if (dimensions != null) {
+        container.innerHTML = "";
+        dimensions = Number(dimensions)
+        if (dimensions > 100) {dimensions = 100} 
+        getGrid(dimensions)
+    }
+})
+getGrid()
 
-// 16x16 square grid
-for (let i = 0; i <16; i++) {
-    const row = document.createElement("div")
-    row.style.display = "flex"
-    row.style.border = "2px solid black"
-    //row.style.height = "100px"
-    row.style.flex = "auto"
-    
-    for (let j = 0; j < 16; j++) {
-        const square = document.createElement("div")
-        square.setAttribute("id", `square(${i},${j})`)
-        square.style.height = "50px"
-        square.style.width = "50px"
-        square.style.border = "2px solid black"
-        square.style.flex = "auto"
-        
-        square.addEventListener("mouseover", () => {
-            square.style.backgroundColor = "black"
-        })
-        // square.addEventListener("mouseout", () => {
-        //     square.style.backgroundColor = "white"
-        // })
-
-        row.appendChild(square)
-        }
-    container.appendChild(row)
-}
-
-// body.appendChild(input)
+body.insertBefore(btn, container)
